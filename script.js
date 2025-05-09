@@ -70,7 +70,8 @@ async function run() {
         console.log("Balloon position:", balloonPositions);
         console.log(`Adding marker at lat: ${balloon.lat}, lon: ${balloon.lon}`);
 
-        addMarker(balloon.lat, balloon.lon, "Balloon", "red");
+        addMarker(balloon.lat, balloon.lon, `Balloon at ${balloon.lat.toFixed(2)}, ${balloon.lon.toFixed(2)}`, "red");
+
 
         planePositions.forEach(plane => {
             const d = getDistance(balloon.lat, balloon.lon, plane.lat, plane.lon);
@@ -79,7 +80,8 @@ async function run() {
 
             if (d < 50 && altDiff < 1000) {
                 console.log(`Conflict: ${plane.callsign} near balloon`);
-                addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsign}`, "orange");
+                addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsign || 'unknown'}`, "orange");
+
             }
         });
     });

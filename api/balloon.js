@@ -1,11 +1,20 @@
 export default async function handler(req, res) {
+  const allData = [];
+
+  // Try to fetch 00 through 23.json
+  for (let i = 0; i <= 23; i++) {
+    const padded = i.toString().padStart(2, '0');
+    const url = `https://a.windbornesystems.com/treasure/${padded}.json`;
+
     try {
-      const response = await fetch('https://a.windbornesystems.com/treasure/00.json');
+      const response = await fetch(url);
       const data = await response.json();
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.status(200).json(data);
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch balloon data' });
+      allData.push(...data); // flatten
+    } catch (err) {
+      console.warn(`Skipping ${url} due to error.`);
     }
   }
-  
+
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.status(200).json(allData);
+}
