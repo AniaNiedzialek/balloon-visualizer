@@ -63,10 +63,13 @@ async function run() {
         lat: p[6],
         lon: p[5],
         alt: p[7],
-        callsing: p[1],
+        callsign: p[1],
     })).filter(p => p.lat && p.lon);
 
     balloonPositions.forEach(balloon => {
+        console.log("Balloon position:", balloonPositions);
+        console.log(`Adding marker at lat: ${balloon.lat}, lon: ${balloon.lon}`);
+
         addMarker(balloon.lat, balloon.lon, "Balloon", "red");
 
         planePositions.forEach(plane => {
