@@ -54,10 +54,12 @@ async function run() {
     const balloonPositions = balloons
         .filter(b => Array.isArray(b) && b.length >= 3)
         .map(b => ({
-            lon: b[0],
-            lat: b[1],
+            lat: b[0],
+            lon: b[1],
             alt: b[2],
-    }));
+}));
+
+  
 
     
     const planePositions = planes.map(p => ({
