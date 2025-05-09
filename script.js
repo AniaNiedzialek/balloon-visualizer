@@ -15,11 +15,11 @@ function getDistance(lat1, lon1, lat2, lon2){
 }
 
 async function fetchBalloonData() {
-    const url = '/api/balloon';
+    // const url = '/api/balloon';
 
     try {
         const response = await fetch('/api/balloon');
-        console.log("Balloon data:", balloons);
+        // console.log("Balloon data:", balloons);
 
         const data = await response.json();
         return data;
