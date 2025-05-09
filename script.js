@@ -15,7 +15,8 @@ function getDistance(lat1, lon1, lat2, lon2){
 }
 
 async function fetchBalloonData() {
-    const url = 'https://a.windbornesystems.com/treasure/00.json';
+    const url = '/api/balloon';
+
     try {
         const response = await fetch(url);
         const data = await response.json();
