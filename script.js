@@ -18,7 +18,9 @@ async function fetchBalloonData() {
     const url = '/api/balloon';
 
     try {
-        const response = await fetch(url);
+        const response = await fetch('/api/balloon');
+        console.log("Balloon data:", balloons);
+
         const data = await response.json();
         return data;
 
