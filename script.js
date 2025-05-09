@@ -29,7 +29,18 @@ async function fetchBalloonData() {
 
 
 async function fetchAircraftData() {
-    const bounds = L.latLngBounds();
+    const bounds = L.latLngBounds(
+        L.latLng(-60, -180),
+        L.latLng(85, 180)        
+    );
+
+    map.setMaxBounds(bounds);
+    map.on('drag', function() {
+        map.panInsideBounds(bounds, { animate: false });
+    });
+
+    map.setMinZoom(2);
+    map.setMaxZoom(10);
 
     try {
         const response = await fetch('https://opensky-network.org/api/states/all');
@@ -60,9 +71,6 @@ async function run() {
             lon: b[1],
             alt: b[2],
 }));
-
-  
-
     
     const planePositions = planes.map(p => ({
         lat: p[6],
