@@ -88,6 +88,8 @@ async function run() {
             }
         });
     });
+    document.getElementById('spinner').style.display = 'none';
+
 }
 
 run();
