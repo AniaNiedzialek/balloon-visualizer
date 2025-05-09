@@ -1,4 +1,8 @@
 const map = L.map('map').setView([37.7749, -122.4194], 4);
+const bounds = L.latLngBounds(
+    L.latLng(-60, -180),
+    L.latLng(85, 180)        
+);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -29,10 +33,7 @@ async function fetchBalloonData() {
 
 
 async function fetchAircraftData() {
-    const bounds = L.latLngBounds(
-        L.latLng(-60, -180),
-        L.latLng(85, 180)        
-    );
+    
 
     map.setMaxBounds(bounds);
     map.on('drag', function() {
