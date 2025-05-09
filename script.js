@@ -54,10 +54,11 @@ async function run() {
     const planes = await fetchAircraftData();
 
     const balloonPositions = balloons.map(b => ({
-        lat: b.lat,
-        lon: b.lon,
-        alt: b.altitude,
+        lon: b[0],
+        lat: b[1],
+        alt: b[2],
     }));
+    
     const planePositions = planes.map(p => ({
         lat: p[6],
         lon: p[5],
