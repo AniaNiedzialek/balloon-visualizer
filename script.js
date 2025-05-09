@@ -78,8 +78,8 @@ async function run() {
 
 
             if (d < 50 && altDiff < 1000) {
-                console.log(`Conflict: ${plane.callsing} near balloon`);
-                addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsing}`, "orange");
+                console.log(`Conflict: ${plane.callsign} near balloon`);
+                addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsign}`, "orange");
             }
         });
     });
