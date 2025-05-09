@@ -51,11 +51,14 @@ async function run() {
     const balloons = await fetchBalloonData();
     const planes = await fetchAircraftData();
 
-    const balloonPositions = balloons.map(b => ({
-        lon: b[0],
-        lat: b[1],
-        alt: b[2],
+    const balloonPositions = balloons
+        .filter(b => Array.isArray(b) && b.length >= 3)
+        .map(b => ({
+            lon: b[0],
+            lat: b[1],
+            alt: b[2],
     }));
+
     
     const planePositions = planes.map(p => ({
         lat: p[6],
@@ -65,7 +68,7 @@ async function run() {
     })).filter(p => p.lat && p.lon);
 
     balloonPositions.forEach(balloon => {
-        console.log("Balloon position:", balloonPositions);
+        console.log("Balloon position:", balloon);
         console.log(`Adding marker at lat: ${balloon.lat}, lon: ${balloon.lon}`);
 
         addMarker(balloon.lat, balloon.lon, `Balloon at ${balloon.lat.toFixed(2)}, ${balloon.lon.toFixed(2)}`, "red");
