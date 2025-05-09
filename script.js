@@ -50,40 +50,40 @@ function addMarker(lat, lon, label, color) {
 }
 
 async function run() {
-    const balloons = await fetch('/api/balloon').then(res => res.json());
+    const balloons = await fetchBalloonData();
     const planes = await fetchAircraftData();
-  
+
     const balloonPositions = balloons.map(b => ({
-      lon: b[0],
-      lat: b[1],
-      alt: b[2],
+        lon: b[0],
+        lat: b[1],
+        alt: b[2],
     }));
-  
-    console.log('Balloon positions:', balloonPositions);
-  
+    
     const planePositions = planes.map(p => ({
-      lat: p[6],
-      lon: p[5],
-      alt: p[7],
-      callsign: p[1],
+        lat: p[6],
+        lon: p[5],
+        alt: p[7],
+        callsign: p[1],
     })).filter(p => p.lat && p.lon);
-  
+
     balloonPositions.forEach(balloon => {
-      if (balloon.lat && balloon.lon) {
-        console.log(`Plotting balloon at ${balloon.lat}, ${balloon.lon}`);
+        console.log("Balloon position:", balloonPositions);
+        console.log(`Adding marker at lat: ${balloon.lat}, lon: ${balloon.lon}`);
+
         addMarker(balloon.lat, balloon.lon, "Balloon", "red");
-  
+
         planePositions.forEach(plane => {
-          const d = getDistance(balloon.lat, balloon.lon, plane.lat, plane.lon);
-          const altDiff = Math.abs((balloon.alt || 0) - (plane.alt || 0));
-          if (d < 50 && altDiff < 1000) {
-            addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsign}`, "orange");
-          }
+            const d = getDistance(balloon.lat, balloon.lon, plane.lat, plane.lon);
+            const altDiff = Math.abs((balloon.alt || 0) - (plane.alt || 0));
+
+
+            if (d < 50 && altDiff < 1000) {
+                console.log(`Conflict: ${plane.callsing} near balloon`);
+                addMarker(plane.lat, plane.lon, `Aircraft: ${plane.callsing}`, "orange");
+            }
         });
-      }
     });
-  }
-  
+}
 
 run();
     
