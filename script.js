@@ -15,21 +15,17 @@ function getDistance(lat1, lon1, lat2, lon2){
 }
 
 async function fetchBalloonData() {
-    // const url = '/api/balloon';
-
     try {
         const response = await fetch('/api/balloon');
-        // console.log("Balloon data:", balloons);
-
         const data = await response.json();
+        console.log("Balloon data:", data); 
         return data;
-
-    }
-    catch (e) {
+    } catch (e) {
         console.error('Error fetching balloon data:', e);
         return [];
     }
 }
+
 
 
 async function fetchAircraftData() {
